@@ -1,22 +1,33 @@
 const router = require('express').Router();
 const Auth = require('./authModel');
-const { ops, createError } = require('../../lib/');
+const { createError, hash, token } = require('../../lib/');
 
-const bc = require('bcryptjs');
-
-router.post('/register', (req, res) => {
+router.post('/register', async (req, res) => {
   const user = req.body;
-  ops.post(res, Auth.createUser, 'User', user);
+  try {
+    const [newUser] = await Auth.createUser({
+      ...user,
+      Password: hash.create(user.Password),
+    });
+
+    res.status(201).json({ token: token.create(newUser) });
+  } catch (error) {
+    createError(res, error, 'User');
+  }
 });
 
 router.post('/login', async (req, res) => {
   const { Username, Password } = req.body;
   try {
-    const user = await Auth.getByUsername(Username);
-    if (user.length <= 0) {
-      throw new Error('not found');
+    const [user] = await Auth.getByUsername(Username);
+    if (!user) throw new Error('not found');
+
+    if (hash.check(Password, user.Password)) {
+      const newToken = token.create(user);
+      res.status(201).json({ token: newToken });
+    } else {
+      throw new Error('invalid credentials');
     }
-    res.status(200).json(user[0]);
   } catch (error) {
     createError(res, error, 'User');
   }
