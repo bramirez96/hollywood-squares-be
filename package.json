@@ -1,0 +1,11 @@
+{
+  "name": "hollywoodsquares",
+  "version": "1.0.0",
+  "description": "A RESTful API server for my Hollywood Squares react app",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC"
+}
