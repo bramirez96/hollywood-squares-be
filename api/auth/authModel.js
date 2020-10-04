@@ -1,7 +1,7 @@
 const db = require('../../data/db-connect');
 
 const createUser = (user) => {
-  return db('Users').insert(user).returning('ID');
+  return db('Users').insert(user).returning('*');
 };
 
 const getByUsername = (Username) => {
