@@ -6,7 +6,8 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "watch:dev": "nodemon",
-    "knex": "npx knex --knexfile config/knexfile.js"
+    "knex": "npx knex --knexfile config/knexfile.js",
+    "seed": "npx knex --knexfile config/knexfile.js seed:run"
   },
   "author": "",
   "license": "ISC",
