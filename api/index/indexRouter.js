@@ -4,7 +4,6 @@ router.get('/', (req, res) => {
   res.status(200).json({
     api: 'up',
     timestamp: Date.now(),
-    ...req.decodedToken,
   });
 });
 
