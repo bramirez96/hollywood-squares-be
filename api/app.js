@@ -22,9 +22,11 @@ server.use(logger('dev'));
 // Router Imports
 const indexRouter = require('./index/indexRouter');
 const authRouter = require('./auth/authRouter');
+const gameRouter = require('./game/gameRouter');
 
 // Router Additions
 server.use('/', indexRouter);
 server.use('/', authRouter);
+server.use(['/game', '/games'], gameRouter);
 
 module.exports = server;
