@@ -11,9 +11,14 @@ router.get('/:id', authRequired, (req, res) => {
 });
 
 router.post('/:id', authRequired, (req, res) => {
-  const { id } = req.params;
-  const qs = req.body.map((x) => ({ ...x, InstanceID: id }));
-  ops.postMult(res, Questions.addQuestions, 'Question', qs);
+  const { id: InstanceID } = req.params;
+  let data;
+  if (Array.isArray(req.body)) {
+    data = req.body.map((x) => ({ ...x, InstanceID }));
+  } else {
+    data = { ...req.body, InstanceID };
+  }
+  ops.postMult(res, Questions.addQuestions, 'Question', data);
 });
 
 module.exports = router;
