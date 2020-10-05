@@ -1,6 +1,8 @@
 const router = require('express').Router();
-const Auth = require('./authModel');
+
 const { createError, hash, token } = require('../../lib/');
+
+const Auth = require('./authModel');
 
 router.post('/register', async (req, res) => {
   const user = req.body;

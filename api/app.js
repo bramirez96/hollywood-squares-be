@@ -23,10 +23,12 @@ server.use(logger('dev'));
 const indexRouter = require('./index/indexRouter');
 const authRouter = require('./auth/authRouter');
 const gameRouter = require('./game/gameRouter');
+const questionsRouter = require('./question/questionRouter');
 
 // Router Additions
 server.use('/', indexRouter);
 server.use('/', authRouter);
 server.use(['/game', '/games'], gameRouter);
+server.use(['/question', '/questions'], questionsRouter);
 
 module.exports = server;

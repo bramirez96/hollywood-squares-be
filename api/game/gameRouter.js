@@ -1,8 +1,9 @@
 const router = require('express').Router();
 
-const Games = require('./gameModel');
 const { authRequired } = require('../middleware/');
 const { ops } = require('../../lib');
+
+const Games = require('./gameModel');
 
 router.get('/', authRequired, (req, res) => {
   const { ID } = req.decodedToken;

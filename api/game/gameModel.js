@@ -9,7 +9,6 @@ const getInstancesByUser = (OwnerID) => {
     .where({ OwnerID })
     .select(['ID', 'Title', 'Finished', 'WinningTeam AS Winner']);
 };
-
 module.exports = {
   newInstance,
   getInstancesByUser,
